@@ -6,6 +6,7 @@ import Main from "./Pages/Main/Main";
 import Contact from "./Pages/Contact/Contact";
 import Footer from "./Pages/Footer/Footer";
 import Skills from "./Pages/Skills/Skills";
+import NeonCursor from "./components/NeonCursor/NeonCursor";
 import { FaChevronUp, FaCircle } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeProvider, useTheme } from "./contexts/ThemeContext";
@@ -56,6 +57,9 @@ function AppContent() {
       className="min-h-screen bg-bg text-text transition-all duration-500"
       style={{ overflowX: "hidden" }}
     >
+      {/* Neon Cursor */}
+      <NeonCursor />
+
       {/* Background Pattern */}
       <div className="fixed inset-0 opacity-5 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-accent-cyan/20 to-accent-lemon/20 dark:from-accent-evil/20 dark:to-accent-cyan/20" />
