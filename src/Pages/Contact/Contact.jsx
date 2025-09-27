@@ -31,25 +31,25 @@ function Contact() {
         <div className="absolute top-20 md:top-32 right-10 md:right-20 w-32 md:w-40 h-32 md:h-40 bg-accent-cyan/30 rounded-full blur-3xl animate-pulse-glow"></div>
         <div
           className="absolute bottom-10 md:bottom-20 left-5 md:left-10 w-24 md:w-32 h-24 md:h-32 bg-accent-purple/30 dark:bg-accent-evil/30 rounded-full blur-2xl animate-pulse-glow"
-          style={{ animationDelay: "1.5s" }}
+          style={{ animationDelay: "1s" }}
         ></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: -40 }}
+          initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.4 }}
           className="text-center mb-12 md:mb-16"
         >
           <motion.h2
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-glow mb-4 md:mb-6"
-            initial={{ scale: 0.9 }}
+            initial={{ scale: 0.95 }}
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.3 }}
           >
             <span className="text-accent-cyan dark:text-accent-evil">
               Get In
@@ -58,10 +58,10 @@ function Contact() {
           </motion.h2>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.3 }}
             className="text-lg md:text-xl text-muted max-w-2xl mx-auto mb-6 md:mb-8 px-4"
           >
             I'm open to new opportunities and collaborations.
@@ -77,7 +77,7 @@ function Contact() {
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.4 }}
           ></motion.div>
         </motion.div>
 
@@ -85,10 +85,10 @@ function Contact() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.4 }}
             className="glass-strong p-6 md:p-8 rounded-2xl md:rounded-3xl glow-hover"
           >
             <h3 className="text-xl md:text-2xl font-bold text-glow mb-6 md:mb-8">
@@ -181,8 +181,8 @@ function Contact() {
               <motion.button
                 type="submit"
                 disabled={state.submitting}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
                 className="w-full sm:w-auto mx-auto glass-card py-3 md:py-3.5 px-6 md:px-10 rounded-xl font-bold text-sm md:text-base bg-gradient-to-r from-accent-cyan to-accent-purple dark:from-accent-evil dark:to-accent-cyan text-white shadow-lg hover:shadow-xl glow-hover transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 md:space-x-3 min-w-[200px]"
                 style={{
                   background: isLight
@@ -210,10 +210,10 @@ function Contact() {
 
           {/* Lottie Animation */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.4 }}
             className="flex justify-center items-center"
           >
             <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg">
@@ -224,9 +224,8 @@ function Contact() {
               <motion.div
                 className="relative glass-card p-6 md:p-8 rounded-2xl md:rounded-3xl aspect-square flex items-center justify-center"
                 whileHover={{
-                  scale: 1.02,
-                  rotateY: 5,
-                  transition: { duration: 0.3 },
+                  scale: 1.01,
+                  transition: { duration: 0.2 },
                 }}
               >
                 <LazyDotLottie
@@ -238,11 +237,11 @@ function Contact() {
                 <motion.div
                   className="absolute top-4 right-4 w-2 md:w-3 h-2 md:h-3 bg-accent-cyan dark:bg-accent-evil rounded-full"
                   animate={{
-                    scale: [1, 1.5, 1],
-                    opacity: [0.5, 1, 0.5],
+                    scale: [1, 1.2, 1],
+                    opacity: [0.6, 1, 0.6],
                   }}
                   transition={{
-                    duration: 2,
+                    duration: 1.2,
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
@@ -250,14 +249,14 @@ function Contact() {
                 <motion.div
                   className="absolute bottom-6 left-6 w-1.5 md:w-2 h-1.5 md:h-2 bg-accent-purple dark:bg-accent-cyan rounded-full"
                   animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [0.3, 0.8, 0.3],
+                    scale: [1, 1.15, 1],
+                    opacity: [0.5, 0.9, 0.5],
                   }}
                   transition={{
-                    duration: 1.5,
+                    duration: 1,
                     repeat: Infinity,
                     ease: "easeInOut",
-                    delay: 0.5,
+                    delay: 0.3,
                   }}
                 />
               </motion.div>

@@ -144,7 +144,6 @@ const skillsData = [
       },
     ],
   },
-
   {
     category: "Development Tools",
     skills: [
@@ -169,14 +168,10 @@ function Skills() {
   const [isLoading, setIsLoading] = useState(true);
   const [hoveredSkill, setHoveredSkill] = useState(null);
 
-  // All skills in one array
   const allSkills = skillsData.flatMap((category) => category.skills);
 
-  // Simulate loading
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+    const timer = setTimeout(() => setIsLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -184,28 +179,17 @@ function Skills() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
-      },
+      transition: { staggerChildren: 0.05, delayChildren: 0.2 },
     },
   };
 
   const itemVariants = {
-    hidden: {
-      opacity: 0,
-      y: 30,
-      scale: 0.9,
-    },
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 200,
-        damping: 20,
-      },
+      transition: { duration: 0.4, ease: "easeOut" },
     },
   };
 
@@ -214,14 +198,7 @@ function Skills() {
       <section id="skills" className="py-20 relative overflow-hidden">
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="glass-strong p-12 rounded-3xl flex flex-col items-center space-y-6">
-            <DNA
-              visible={true}
-              height="80"
-              width="80"
-              ariaLabel="dna-loading"
-              wrapperStyle={{}}
-              wrapperClass="dna-wrapper"
-            />
+            <DNA visible height="80" width="80" ariaLabel="dna-loading" />
             <p className="text-lg text-muted">Loading Skills...</p>
           </div>
         </div>
@@ -234,31 +211,25 @@ function Skills() {
       {/* Background Effects */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-10 w-32 h-32 bg-accent-cyan/30 rounded-full blur-3xl animate-pulse-glow"></div>
-        <div
-          className="absolute bottom-40 right-20 w-24 h-24 bg-accent-lemon/30 dark:bg-accent-evil/30 rounded-full blur-2xl animate-pulse-glow"
-          style={{ animationDelay: "1s" }}
-        ></div>
-        <div
-          className="absolute top-1/2 left-1/3 w-16 h-16 bg-terminal-green/20 rounded-full blur-xl animate-pulse-glow"
-          style={{ animationDelay: "2s" }}
-        ></div>
+        <div className="absolute bottom-40 right-20 w-24 h-24 bg-accent-lemon/30 dark:bg-accent-evil/30 rounded-full blur-2xl animate-pulse-glow"></div>
+        <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-terminal-green/20 rounded-full blur-xl animate-pulse-glow"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: -40 }}
+          initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.4 }}
           className="text-center mb-16"
         >
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-glow mb-6"
-            initial={{ scale: 0.9 }}
+            initial={{ scale: 0.95 }}
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.3 }}
           >
             <span className="text-accent-cyan dark:text-accent-evil">
               Technical
@@ -267,10 +238,10 @@ function Skills() {
           </motion.h2>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.4 }}
             className="text-xl text-muted max-w-3xl mx-auto mb-8 leading-relaxed"
           >
             Mastering modern web technologies with passion for
@@ -295,7 +266,7 @@ function Skills() {
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.4 }}
           ></motion.div>
         </motion.div>
 
@@ -312,11 +283,10 @@ function Skills() {
               key={skill.name}
               variants={itemVariants}
               whileHover={{
-                scale: 1.05,
-                rotateY: 5,
+                scale: 1.02,
                 transition: { duration: 0.2 },
               }}
-              whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.97 }}
               onHoverStart={() => setHoveredSkill(skill)}
               onHoverEnd={() => setHoveredSkill(null)}
               className="group relative"
@@ -326,9 +296,9 @@ function Skills() {
                 <motion.div
                   className="text-3xl sm:text-4xl lg:text-5xl mb-2 sm:mb-3 lg:mb-4 mx-auto"
                   whileHover={{
-                    rotate: [0, -10, 10, 0],
-                    scale: 1.1,
-                    transition: { duration: 0.4 },
+                    rotate: [0, -8, 8, 0],
+                    scale: 1.05,
+                    transition: { duration: 0.3 },
                   }}
                 >
                   {skill.icon}
@@ -368,11 +338,10 @@ function Skills() {
                       }}
                       viewport={{ once: true }}
                       transition={{
-                        duration: 1.5,
-                        delay: index * 0.1 + 0.5,
+                        duration: 0.7,
+                        delay: index * 0.05 + 0.3,
                         ease: "easeOut",
                       }}
-                      className="drop-shadow-lg"
                       style={{
                         stroke: isLight
                           ? "var(--accent-cyan)"
@@ -387,7 +356,7 @@ function Skills() {
                   </div>
                 </div>
 
-                {/* Description - Hidden on small screens */}
+                {/* Description */}
                 <p className="hidden lg:block text-sm text-muted leading-relaxed mt-auto line-clamp-3">
                   {skill.description}
                 </p>

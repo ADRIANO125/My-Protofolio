@@ -211,17 +211,17 @@ function Hero() {
             className="flex flex-col sm:flex-row gap-4"
           >
             <motion.a
-              href="../../../public/Abdulrahman Kadri CV .pdf"
-              download="AbdulRahman_Kadri_CV.pdf"
+              href="/Abdulrahman_Kadri_CV.pdf"
+              download="Abdulrahman_Kadri_CV.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="glass-card px-8 py-4 rounded-xl text-center 
-             font-semibold transition-all duration-300 flex items-center justify-center space-x-2
-             bg-gradient-to-r 
-             from-accent-cyan to-accent-lemon 
-             dark:from-accent-evil dark:to-accent-cyan 
-             text-black dark:text-white
-             glow-hover"
+    font-semibold transition-all duration-300 flex items-center justify-center space-x-2
+    bg-gradient-to-r 
+    from-accent-cyan to-accent-lemon 
+    dark:from-accent-evil dark:to-accent-cyan 
+    text-black dark:text-white
+    glow-hover"
             >
               <FaDownload className="text-current" />
               <span>Download CV</span>

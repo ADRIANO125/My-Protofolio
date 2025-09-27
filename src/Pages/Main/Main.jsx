@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { FaGithub, FaAngleRight, FaEye, FaCode, FaTimes } from "react-icons/fa";
+import { FaGithub, FaAngleRight, FaEye, FaCode } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../../contexts/ThemeContext";
 import LazyImage from "../../components/LazyImage/LazyImage";
 import projects from "./ProjectsData";
 
 // Categories for filtering
-
 const categories = ["All Projects", "HTML & CSS", "JavaScript", "React"];
 
 function Main() {
@@ -36,35 +35,35 @@ function Main() {
         <div className="absolute top-20 left-20 w-40 h-40 bg-accent-cyan/30 rounded-full blur-3xl animate-pulse-glow"></div>
         <div
           className="absolute bottom-40 right-10 w-32 h-32 bg-accent-lemon/30 dark:bg-accent-evil/30 rounded-full blur-2xl animate-pulse-glow"
-          style={{ animationDelay: "2s" }}
+          style={{ animationDelay: "1s" }}
         ></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: -40 }}
+          initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-glow mb-6"
-            initial={{ scale: 0.9 }}
+            initial={{ scale: 0.95 }}
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
           >
             <span className="text-accent-cyan dark:text-accent-evil">My</span>{" "}
             <span className="glitch-text">Projects</span>
           </motion.h2>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
             className="text-xl text-muted max-w-2xl mx-auto mb-8"
           >
             Explore my latest work and creative solutions. Each project
@@ -85,16 +84,16 @@ function Main() {
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
           ></motion.div>
         </motion.div>
 
         {/* Filter Categories */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.4 }}
           className="flex justify-center mb-12"
         >
           <div className="glass-strong p-2 rounded-2xl">
@@ -103,8 +102,8 @@ function Main() {
                 <motion.button
                   key={category}
                   onClick={() => setActiveFilter(category)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
                   className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                     activeFilter === category
                       ? "glass-card text-accent-cyan dark:text-accent-evil glow"
@@ -122,19 +121,19 @@ function Main() {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeFilter}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.4 }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             {filteredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
-                initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                whileHover={{ y: -5 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05, duration: 0.4 }}
+                whileHover={{ y: -3 }}
                 className="glass-card overflow-hidden rounded-2xl glow-hover group cursor-pointer"
                 onClick={() => setSelectedProject(project)}
               >
@@ -143,7 +142,7 @@ function Main() {
                   <LazyImage
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-56 transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-56 transition-transform duration-300 group-hover:scale-105"
                   />
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -153,7 +152,7 @@ function Main() {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        whileHover={{ scale: 1.1 }}
+                        whileHover={{ scale: 1.05 }}
                         className="glass-card p-3 rounded-full text-accent-cyan hover:text-accent-lemon dark:hover:text-accent-evil transition-colors"
                       >
                         <FaEye size={20} />
@@ -163,7 +162,7 @@ function Main() {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        whileHover={{ scale: 1.1 }}
+                        whileHover={{ scale: 1.05 }}
                         className="glass-card p-3 rounded-full text-accent-cyan hover:text-accent-lemon dark:hover:text-accent-evil transition-colors"
                       >
                         <FaCode size={20} />
@@ -191,7 +190,7 @@ function Main() {
                   {/* Action Button */}
                   <div className="flex items-center justify-between">
                     <motion.button
-                      whileHover={{ x: 5 }}
+                      whileHover={{ x: 3 }}
                       className="flex items-center space-x-2 text-accent-cyan dark:text-accent-evil font-medium hover:text-accent-lemon dark:hover:text-accent-cyan transition-colors"
                     >
                       <span>View Details</span>
@@ -202,11 +201,11 @@ function Main() {
                       <div className="w-2 h-2 rounded-full bg-accent-cyan dark:bg-accent-evil animate-pulse"></div>
                       <div
                         className="w-2 h-2 rounded-full bg-accent-lemon dark:bg-accent-cyan animate-pulse"
-                        style={{ animationDelay: "0.5s" }}
+                        style={{ animationDelay: "0.3s" }}
                       ></div>
                       <div
                         className="w-2 h-2 rounded-full bg-terminal-green animate-pulse"
-                        style={{ animationDelay: "1s" }}
+                        style={{ animationDelay: "0.6s" }}
                       ></div>
                     </div>
                   </div>
