@@ -1,37 +1,36 @@
-/* Glassmorphism Base Classes */
+/* Optimized Glassmorphism Base Classes */
 .glass {
   background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--glass-border);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .glass-strong {
   background: var(--glass-bg);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   border: 1px solid var(--glass-border);
-  border-radius: 15px;
-  box-shadow: 0 12px 40px var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 6px 24px var(--shadow);
 }
 
 .glass-card {
   background: var(--glass-bg);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  box-shadow: 0 6px 24px var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  transition: all 0.3s ease;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .glass-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 32px var(--shadow), 0 0 20px var(--glow),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--shadow);
 }
 
 /* Glow Effects */
@@ -49,38 +48,38 @@
   text-shadow: 0 0 10px currentColor;
 }
 
-/* Animation Keyframes */
+/* Optimized Glow Effects */
+.glow {
+  box-shadow: 0 0 15px var(--glow);
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 20px var(--glow);
+  transform: scale(1.02);
+}
+
+/* Text Effects */
+.text-glow {
+  text-shadow: 0 0 8px currentColor;
+}
+
+/* Optimized Animation Keyframes - Reduced complexity for better performance */
 @keyframes glitch {
   0%,
   100% {
     transform: translate(0) skew(0deg);
   }
-  10% {
-    transform: translate(-2px, -1px) skew(1deg);
-  }
   20% {
-    transform: translate(1px, 0px) skew(-1deg);
-  }
-  30% {
-    transform: translate(-1px, 1px) skew(2deg);
+    transform: translate(-1px, -0.5px) skew(0.5deg);
   }
   40% {
-    transform: translate(2px, -1px) skew(-2deg);
-  }
-  50% {
-    transform: translate(-2px, 2px) skew(1deg);
+    transform: translate(1px, -0.5px) skew(-0.5deg);
   }
   60% {
-    transform: translate(1px, 1px) skew(-1deg);
-  }
-  70% {
-    transform: translate(-1px, -2px) skew(2deg);
+    transform: translate(-0.5px, 1px) skew(0.5deg);
   }
   80% {
-    transform: translate(2px, 1px) skew(-2deg);
-  }
-  90% {
-    transform: translate(-2px, -1px) skew(1deg);
+    transform: translate(1px, 0.5px) skew(-0.5deg);
   }
 }
 
@@ -98,7 +97,7 @@
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -109,7 +108,7 @@
 @keyframes slideInLeft {
   from {
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateX(-30px);
   }
   to {
     opacity: 1;
@@ -120,7 +119,7 @@
 @keyframes slideInRight {
   from {
     opacity: 0;
-    transform: translateX(50px);
+    transform: translateX(30px);
   }
   to {
     opacity: 1;
@@ -131,16 +130,18 @@
 @keyframes pulse-glow {
   0%,
   100% {
-    box-shadow: 0 0 20px var(--glow);
+    opacity: 0.6;
+    transform: scale(1);
   }
   50% {
-    box-shadow: 0 0 30px var(--glow), 0 0 40px var(--glow);
+    opacity: 0.9;
+    transform: scale(1.05);
   }
 }
 
-/* Utility Classes */
+/* Optimized Utility Classes */
 .glitch-text {
-  animation: glitch 2s infinite;
+  animation: glitch 3s infinite;
 }
 
 .caret {
@@ -148,7 +149,11 @@
 }
 
 .pulse-glow {
-  animation: pulse-glow 2s infinite;
+  animation: pulse-glow 3s infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
 }
 
 .toggle {
@@ -229,13 +234,29 @@ html {
   scrollbar-color: rgba(255, 0, 60, 0.6) rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive Utilities */
+/* Optimized Responsive Utilities */
 @media (max-width: 768px) {
   .glass,
   .glass-strong,
   .glass-card {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
+
+  /* Reduce animations on mobile for better performance */
+  .glitch-text {
+    animation: none;
+  }
+
+  .pulse-glow,
+  .animate-pulse-glow {
+    animation-duration: 4s;
+  }
+
+  /* Simplify hover effects on mobile */
+  .glow-hover:hover {
+    transform: none;
+    box-shadow: 0 0 10px var(--glow);
   }
 }
 

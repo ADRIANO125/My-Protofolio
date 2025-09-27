@@ -1,118 +1,115 @@
-'use client';
-import { useState, useEffect, useCallback } from 'react';
-import { motion, useAnimation } from 'framer-motion';
-import './NeonCursor.css';
+"use client";
+import { useState, useEffect, useCallback, useMemo } from "react";
+import { motion } from "framer-motion";
+import "./NeonCursor.css";
+
 const NeonCursor = () => {
-  const [position, setPosition] = useState({
-    x: 0,
-    y: 0,
-    scale: 1,
-    opacity: 1,
-  });
+  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isClicking, setIsClicking] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const trailControls = useAnimation();
-  const glowControls = useAnimation();
+
   const handleMouseMove = useCallback((e) => {
-    setPosition((prev) => ({
-      ...prev,
-      x: e.clientX,
-      y: e.clientY,
-    }));
+    // Throttle mouse move updates for better performance
+    requestAnimationFrame(() => {
+      setPosition({ x: e.clientX, y: e.clientY });
+    });
   }, []);
-  const handleMouseDown = () => setIsClicking(true);
-  const handleMouseUp = () => setIsClicking(false);
-  const handleMouseOver = useCallback(
-    (e) => {
-      const target = e.target;
-      if (target.matches('a, button, input, [data-hover="true"]')) {
-        setIsHovering(true);
-        void trailControls.start({
-          scale: 1.5,
-          borderColor: 'rgb(255, 150, 50)',
-          borderWidth: '3px',
-        });
-        void glowControls.start({
-          scale: 2,
-          opacity: 0.8,
-        });
-      }
-    },
-    [trailControls, glowControls]
-  );
+
+  const handleMouseDown = useCallback(() => setIsClicking(true), []);
+  const handleMouseUp = useCallback(() => setIsClicking(false), []);
+
+  const handleMouseOver = useCallback((e) => {
+    const target = e.target;
+    if (target.matches('a, button, input, [data-hover="true"]')) {
+      setIsHovering(true);
+    }
+  }, []);
+
   const handleMouseOut = useCallback(() => {
     setIsHovering(false);
-    void trailControls.start({
-      scale: 1,
-      borderColor: 'rgb(236, 101, 23)',
-      borderWidth: '2px',
-    });
-    void glowControls.start({
-      scale: 1,
-      opacity: 0.4,
-    });
-  }, [trailControls, glowControls]);
+  }, []);
+
   useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
-    window.addEventListener('mouseover', handleMouseOver);
-    window.addEventListener('mouseout', handleMouseOut);
+    // Use passive listeners for better performance
+    const options = { passive: true };
+
+    window.addEventListener("mousemove", handleMouseMove, options);
+    window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("mouseover", handleMouseOver);
+    window.addEventListener("mouseout", handleMouseOut);
+
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mouseup', handleMouseUp);
-      window.removeEventListener('mouseover', handleMouseOver);
-      window.removeEventListener('mouseout', handleMouseOut);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("mouseover", handleMouseOver);
+      window.removeEventListener("mouseout", handleMouseOut);
     };
   }, [handleMouseMove, handleMouseOver, handleMouseOut]);
+
+  // Memoize animation variants for performance
+  const cursorVariants = useMemo(
+    () => ({
+      main: {
+        x: position.x - 10,
+        y: position.y - 10,
+        scale: isClicking ? 0.8 : isHovering ? 1.2 : 1,
+      },
+      trail: {
+        x: position.x - 20,
+        y: position.y - 20,
+      },
+      glow: {
+        x: position.x - 30,
+        y: position.y - 30,
+      },
+    }),
+    [position.x, position.y, isClicking, isHovering]
+  );
+
+  // Optimized transition settings
+  const transitionConfig = useMemo(
+    () => ({
+      type: "spring",
+      damping: 25,
+      stiffness: 350,
+      mass: 0.5,
+    }),
+    []
+  );
+
   return (
     <div className="neon-cursor-container">
       <motion.div
         className="cursor-main"
-        animate={{
-          x: position.x - 10,
-          y: position.y - 10,
-          scale: isClicking ? 0.8 : isHovering ? 1.2 : 1,
-        }}
-        transition={{
-          type: 'spring',
-          damping: 20,
-          stiffness: 400,
-          mass: 0.5,
-        }}
+        animate={cursorVariants.main}
+        transition={transitionConfig}
       />
 
       <motion.div
         className="cursor-trail"
-        animate={{
-          x: position.x - 20,
-          y: position.y - 20,
-        }}
+        animate={cursorVariants.trail}
         transition={{
-          type: 'spring',
+          ...transitionConfig,
           damping: 30,
           stiffness: 200,
           mass: 0.8,
         }}
-        initial={false}
       />
 
       <motion.div
         className="cursor-glow"
-        animate={{
-          x: position.x - 30,
-          y: position.y - 30,
-        }}
+        animate={cursorVariants.glow}
         transition={{
-          type: 'spring',
+          ...transitionConfig,
           damping: 40,
           stiffness: 150,
           mass: 1,
         }}
-        initial={false}
       />
     </div>
   );
 };
+
 export default NeonCursor;

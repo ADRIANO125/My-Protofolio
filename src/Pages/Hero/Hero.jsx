@@ -13,8 +13,9 @@ import { DiGitBranch } from "react-icons/di";
 
 import { MdVerified } from "react-icons/md";
 import { motion, useAnimation } from "framer-motion";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import LazyDotLottie from "../../components/LazyDotLottie/LazyDotLottie";
 import { useTheme } from "../../contexts/ThemeContext";
+import LazyImage from "../../components/LazyImage/LazyImage";
 import Avatar from "../../assets/Avatar.jpg";
 
 function Hero() {
@@ -132,10 +133,10 @@ function Hero() {
                 className="w-40 h-40 rounded-2xl glass-card p-2 glow-hover"
                 whileHover={{ scale: 1.05 }}
               >
-                <img
+                <LazyImage
                   src={Avatar}
                   alt="Abdul Rahman Kadri"
-                  className="w-full h-full object-cover rounded-xl"
+                  className="w-full h-full rounded-xl"
                 />
                 <motion.div
                   initial={{ scale: 0 }}
@@ -286,14 +287,12 @@ function Hero() {
                 transition: { duration: 0.3 },
               }}
             >
-              <DotLottieReact
+              <LazyDotLottie
                 src={
                   isLight
                     ? "https://lottie.host/0bdaed9f-0a6e-4ec2-b59c-fabd428cb575/sgJvyxpNQj.lottie"
                     : "https://lottie.host/7a83a65d-5fbe-4644-b14a-24d957214fbb/f8yrN8TOKh.lottie"
                 }
-                loop
-                autoplay
                 className="w-full h-auto"
               />
             </motion.div>

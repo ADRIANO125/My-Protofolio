@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useForm, ValidationError } from "@formspree/react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { toast } from "react-toastify";
+import LazyDotLottie from "../../components/LazyDotLottie/LazyDotLottie";
 import { useTheme } from "../../contexts/ThemeContext";
 import { FaPaperPlane, FaUser, FaEnvelope, FaComment } from "react-icons/fa";
 
@@ -13,13 +12,17 @@ function Contact() {
 
   useEffect(() => {
     if (state.succeeded) {
-      toast.success("Your message has been sent successfully! Thank you.");
+      toast.success("Your message has been sent successfully! Thank you.", {
+        toastId: "success-toast",
+      });
       document.getElementById("contact-form").reset();
     }
     if (state.errors && state.errors.length > 0) {
-      toast.error("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.", {
+        toastId: "error-toast",
+      });
     }
-  }, [state.succeeded, state.errors]);
+  }, [state]);
 
   return (
     <section id="contact" className="py-12 md:py-20 relative overflow-hidden">
@@ -31,18 +34,6 @@ function Contact() {
           style={{ animationDelay: "1.5s" }}
         ></div>
       </div>
-
-      {/* Toast Container */}
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        theme={isLight ? "light" : "dark"}
-        hideProgressBar={false}
-        newestOnTop={true}
-        closeOnClick
-        pauseOnHover
-        className="z-50"
-      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -238,10 +229,8 @@ function Contact() {
                   transition: { duration: 0.3 },
                 }}
               >
-                <DotLottieReact
+                <LazyDotLottie
                   src="https://lottie.host/b35c9d98-0698-410b-940c-b7a6a32d5c9a/zwzwIquDiv.lottie"
-                  loop
-                  autoplay
                   className="w-full h-auto max-w-xs md:max-w-sm"
                 />
 

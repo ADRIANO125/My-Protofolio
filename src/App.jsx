@@ -1,16 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import "./App.css";
 import Header from "./Pages/Header/Header";
-import Hero from "./Pages/Hero/Hero";
-import Main from "./Pages/Main/Main";
-import Contact from "./Pages/Contact/Contact";
-import Footer from "./Pages/Footer/Footer";
-import Skills from "./Pages/Skills/Skills";
-import NeonCursor from "./components/NeonCursor/NeonCursor";
-import { FaChevronUp, FaCircle } from "react-icons/fa";
+import { FaChevronUp } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeProvider, useTheme } from "./contexts/ThemeContext";
 import { DNA } from "react-loader-spinner";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+// Lazy load heavy components
+const Hero = lazy(() => import("./Pages/Hero/Hero"));
+const Main = lazy(() => import("./Pages/Main/Main"));
+const Contact = lazy(() => import("./Pages/Contact/Contact"));
+const Footer = lazy(() => import("./Pages/Footer/Footer"));
+const Skills = lazy(() => import("./Pages/Skills/Skills"));
+const NeonCursor = lazy(() => import("./components/NeonCursor/NeonCursor"));
+
+// Loading component for Suspense fallbacks
+const ComponentLoader = ({ className = "" }) => (
+  <div className={`flex items-center justify-center p-8 ${className}`}>
+    <div className="w-8 h-8 border-2 border-accent-cyan border-t-transparent rounded-full animate-spin"></div>
+  </div>
+);
 
 function AppContent() {
   const { theme } = useTheme();
@@ -22,14 +33,13 @@ function AppContent() {
     const handleScroll = () => {
       setShowButton(window.scrollY > 300);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Loading effect
+  // Loading effect - reduced time for better UX
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2500);
+    const timer = setTimeout(() => setIsLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -57,8 +67,20 @@ function AppContent() {
       className="min-h-screen bg-bg text-text transition-all duration-500"
       style={{ overflowX: "hidden" }}
     >
+      {/* ToastContainer على مستوى الصفحة */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        theme={theme === "light" ? "light" : "dark"}
+      />
+
       {/* Neon Cursor */}
-      <NeonCursor />
+      <Suspense fallback={null}>
+        <NeonCursor />
+      </Suspense>
 
       {/* Background Pattern */}
       <div className="fixed inset-0 opacity-5 pointer-events-none">
@@ -82,7 +104,9 @@ function AppContent() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="glass p-8 md:p-12"
           >
-            <Hero />
+            <Suspense fallback={<ComponentLoader className="min-h-[400px]" />}>
+              <Hero />
+            </Suspense>
           </motion.div>
 
           <motion.div
@@ -92,7 +116,9 @@ function AppContent() {
             transition={{ duration: 0.6 }}
             className="glass p-8 md:p-12"
           >
-            <Skills />
+            <Suspense fallback={<ComponentLoader className="min-h-[300px]" />}>
+              <Skills />
+            </Suspense>
           </motion.div>
 
           <motion.div
@@ -102,7 +128,9 @@ function AppContent() {
             transition={{ duration: 0.6 }}
             className="glass p-8 md:p-12"
           >
-            <Main />
+            <Suspense fallback={<ComponentLoader className="min-h-[400px]" />}>
+              <Main />
+            </Suspense>
           </motion.div>
 
           <motion.div
@@ -112,7 +140,9 @@ function AppContent() {
             transition={{ duration: 0.6 }}
             className="glass p-8 md:p-12"
           >
-            <Contact />
+            <Suspense fallback={<ComponentLoader className="min-h-[300px]" />}>
+              <Contact />
+            </Suspense>
           </motion.div>
 
           <motion.div
@@ -122,7 +152,9 @@ function AppContent() {
             transition={{ duration: 0.6 }}
             className="glass p-6"
           >
-            <Footer />
+            <Suspense fallback={<ComponentLoader />}>
+              <Footer />
+            </Suspense>
           </motion.div>
         </div>
       </div>

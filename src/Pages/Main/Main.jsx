@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaGithub, FaAngleRight, FaEye, FaCode, FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../../contexts/ThemeContext";
+import LazyImage from "../../components/LazyImage/LazyImage";
 import projects from "./ProjectsData";
 
 // Categories for filtering
@@ -139,10 +140,10 @@ function Main() {
               >
                 {/* Project Image */}
                 <div className="relative overflow-hidden">
-                  <img
+                  <LazyImage
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-56 transition-transform duration-500 group-hover:scale-110"
                   />
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
