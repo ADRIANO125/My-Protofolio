@@ -211,8 +211,8 @@ function Hero() {
             className="flex flex-col sm:flex-row gap-4"
           >
             <motion.a
-              href="/Abdulrahman_Kadri_CV.pdf"
-              download="Abdulrahman_Kadri_CV.pdf"
+              href="/Abdulrahman_Kadri_CV_v2.pdf"
+              download="Abdulrahman_Kadri_CV_v2.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="glass-card px-8 py-4 rounded-xl text-center 
